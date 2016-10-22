@@ -2,8 +2,8 @@
 
 namespace Laravolt\Database\Eloquent;
 
-use Laravolt\Contracts\Eloquent\Uuid;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravolt\Contracts\Eloquent\Uuid;
 
 class UuidServiceProvider extends BaseServiceProvider
 {
@@ -17,16 +17,20 @@ class UuidServiceProvider extends BaseServiceProvider
 
     public function boot()
     {
-        //
+        // BOOT
     }
 
     public function registerEvents()
     {
+
         $this->app['events']->listen('eloquent.creating*', function ($model) {
+
             if ($model instanceof Uuid) {
                 $model->fillUuid();
             }
+
         });
+
     }
 
 }
